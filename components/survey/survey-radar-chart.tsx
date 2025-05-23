@@ -59,7 +59,7 @@ export function SurveyRadarChart({
             x={0}
             y={index * lineHeight}
             textAnchor="middle"
-            className="text-[11px] fill-current"
+            className="text-[12px] fill-current"
             dy={index === 0 ? -(totalHeight / 2) : 0}
           >
             {word}
@@ -88,8 +88,8 @@ export function SurveyRadarChart({
             >
               <RadarChart 
                 data={normalizedData} 
-                outerRadius="65%" 
-                margin={{ top: 20, right: 60, bottom: 20, left: 60 }}
+                outerRadius="100%" 
+                margin={{ top: 40, right: 20, bottom: 20, left: 20 }}
               >
                 <ChartTooltip
                   cursor={false}
@@ -98,6 +98,9 @@ export function SurveyRadarChart({
                 <PolarAngleAxis 
                   dataKey="category" 
                   tick={renderAxisTick}
+                  tickLine={false}
+                  axisLine={false}
+                  radius={10}
                 />
                 <PolarGrid 
                   radialLines={true}
@@ -114,7 +117,7 @@ export function SurveyRadarChart({
                   fillOpacity={0.3}
                   stroke="var(--color-value)"
                   strokeWidth={2}
-                  dot={{ fill: "var(--color-value)", strokeWidth: 2, r: 4 }}
+                  dot={{ fill: "var(--color-value)", strokeWidth: 2, r: 5 }}
                 />
               </RadarChart>
             </ChartContainer>
