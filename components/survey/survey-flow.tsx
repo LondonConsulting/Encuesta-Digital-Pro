@@ -33,7 +33,9 @@ export function SurveyFlow() {
 
   // Effect to scroll to top when page or step changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100); // Small delay to ensure DOM updates are complete
   }, [currentPageIndex, step]);
 
   const saveSurveyData = async () => {
