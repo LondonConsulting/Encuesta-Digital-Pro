@@ -8,33 +8,52 @@ export class SurveyService {
    */
   static async saveSurveyResponse(
     surveyData: SurveySubmission,
-    metadata?: { userAgent?: string; ipAddress?: string }
+    metadata?: { userAgent?: string; ipAddress?: string; host?: string; environment?: string }
   ): Promise<string> {
-    // Connect to MongoDB
-    await connectMongoDB();
+    console.log('🔄 Connecting to MongoDB...');
     
-    // Prepare the survey response document
-    const surveyResponse = {
-      responses: surveyData.responses,
-      metadata: {
-        ...surveyData.metadata,
-        ...metadata
-      },
-      pillarScores: this.calculatePillarScores(surveyData.responses),
-      totalScore: 0 // Will be calculated after pillarScores
-    };
+    try {
+      // Connect to MongoDB
+      await connectMongoDB();
+      
+      console.log('📝 Preparing survey data...');
+      
+      // Prepare the survey response document
+      const surveyResponse = {
+        responses: surveyData.responses,
+        metadata: {
+          ...surveyData.metadata,
+          ...metadata
+        },
+        pillarScores: this.calculatePillarScores(surveyData.responses),
+        totalScore: 0, // Will be calculated after pillarScores
+        timestamp: new Date()
+      };
 
-    // Calculate total score
-    if (surveyResponse.pillarScores) {
-      const scores = Object.values(surveyResponse.pillarScores);
-      surveyResponse.totalScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+      // Calculate total score
+      if (surveyResponse.pillarScores) {
+        const scores = Object.values(surveyResponse.pillarScores);
+        surveyResponse.totalScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+      }
+
+      console.log('💾 Creating new survey document...');
+      
+      // Save using Mongoose
+      const savedSurvey = new Survey(surveyResponse);
+      await savedSurvey.save();
+      
+      console.log('✅ Survey saved with ID:', savedSurvey._id);
+      
+      return savedSurvey._id.toString();
+      
+    } catch (error) {
+      console.error('❌ Error in saveSurveyResponse:', {
+        errorName: error instanceof Error ? error.name : 'Unknown',
+        errorMessage: error instanceof Error ? error.message : 'Unknown error',
+        errorStack: error instanceof Error ? error.stack : undefined
+      });
+      throw error;
     }
-
-    // Save using Mongoose (much simpler!)
-    const savedSurvey = new Survey(surveyResponse);
-    await savedSurvey.save();
-    
-    return savedSurvey._id.toString();
   }
 
   /**
