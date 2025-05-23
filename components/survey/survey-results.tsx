@@ -261,13 +261,13 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
       </div>
 
       <Tabs defaultValue="resumen" className="w-full">
-        <TabsList className="grid w-full grid-cols-6">
-          <TabsTrigger value="resumen">Resumen</TabsTrigger>
-          <TabsTrigger value="analisis">Análisis</TabsTrigger>
-          <TabsTrigger value="estrategia">Estrategia</TabsTrigger>
-          <TabsTrigger value="tecnologia">Tecnología</TabsTrigger>
-          <TabsTrigger value="analitica">Analítica</TabsTrigger>
-          <TabsTrigger value="gente">Gente</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
+          <TabsTrigger value="resumen" className="text-sm sm:text-base">Resumen</TabsTrigger>
+          <TabsTrigger value="analisis" className="text-sm sm:text-base">Análisis</TabsTrigger>
+          <TabsTrigger value="estrategia" className="text-sm sm:text-base">Estrategia</TabsTrigger>
+          <TabsTrigger value="tecnologia" className="text-sm sm:text-base">Tecnología</TabsTrigger>
+          <TabsTrigger value="analitica" className="text-sm sm:text-base">Analítica</TabsTrigger>
+          <TabsTrigger value="gente" className="text-sm sm:text-base">Gente</TabsTrigger>
         </TabsList>
 
         <TabsContent value="resumen" className="space-y-6">
@@ -326,11 +326,11 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                   />
                 </div>
               )}
-              <div className="mt-6 flex space-x-4">
+              <div className="mt-6 flex flex-col sm:flex-row gap-4">
                 {isGeneratingReport ? (
                   <Button 
                     size="lg"
-                    className="gap-2"
+                    className="gap-2 w-full sm:w-auto"
                     disabled
                   >
                     <Download className="w-4 h-4" />
@@ -358,7 +358,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                     {({ blob, url, loading, error }) => (
                       <Button 
                         size="lg"
-                        className="gap-2"
+                        className="gap-2 w-full sm:w-auto"
                         disabled={loading || !reportText}
                       >
                         <Download className="w-4 h-4" />
@@ -367,7 +367,11 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                     )}
                   </PDFDownloadLink>
                 )}
-                <Button onClick={onNewSurvey} variant="outline">
+                <Button 
+                  onClick={onNewSurvey} 
+                  variant="outline"
+                  className="w-full sm:w-auto"
+                >
                   Nueva Encuesta
                 </Button>
               </div>
