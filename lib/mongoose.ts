@@ -31,19 +31,35 @@ async function connectMongoDB() {
   if (!cached!.promise) {
     const opts = {
       bufferCommands: false,
+      serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     };
 
-    cached!.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('✅ MongoDB connected with Mongoose');
-      return mongoose;
-    });
+    console.log('🔄 Attempting MongoDB connection...');
+
+    cached!.promise = mongoose.connect(MONGODB_URI, opts)
+      .then((mongoose) => {
+        console.log('✅ MongoDB connected successfully with Mongoose');
+        console.log('📊 Database:', mongoose.connection.db.databaseName);
+        console.log('🔌 Connection state:', mongoose.connection.readyState);
+        return mongoose;
+      })
+      .catch((error) => {
+        console.error('❌ MongoDB connection error details:', {
+          name: error.name,
+          message: error.message,
+          code: error.code,
+          stack: error.stack
+        });
+        throw error;
+      });
   }
 
   try {
     cached!.conn = await cached!.promise;
   } catch (e) {
     cached!.promise = null;
-    console.error('❌ MongoDB connection failed:', e);
+    console.error('❌ MongoDB connection attempt failed:', e);
     throw e;
   }
 
