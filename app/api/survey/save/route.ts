@@ -19,14 +19,19 @@ export async function POST(request: NextRequest) {
       hasMetadata: !!surveyData.metadata,
     });
     
-    // Extract metadata from headers
-    const metadata = {
+    // Extract metadata from headers with explicit typing
+    const metadata: {
+      userAgent?: string;
+      ipAddress?: string;
+      host?: string;
+      environment?: string;
+    } = {
       userAgent: request.headers.get('user-agent') || undefined,
       ipAddress: request.headers.get('x-forwarded-for') || 
                 request.headers.get('x-real-ip') || 
                 'unknown',
-      host: request.headers.get('host'),
-      environment: process.env.NODE_ENV,
+      host: request.headers.get('host') || undefined,
+      environment: process.env.NODE_ENV || undefined,
     };
     
     console.log('🔄 Attempting to save survey data...');

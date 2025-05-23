@@ -24,6 +24,8 @@ export interface SurveyResponse {
     completionTime?: number;
     userAgent?: string;
     ipAddress?: string;
+    host?: string;
+    environment?: string;
   };
   pillarScores?: {
     [pillarName: string]: number;
@@ -39,5 +41,7 @@ export interface SurveySubmission {
     completionTime?: number;
     userAgent?: string;
     ipAddress?: string;
+    host?: string;
+    environment?: string;
   };
 } 
