@@ -4,9 +4,16 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ArrowRight, BarChart2, Brain, Lightbulb } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Home() {
   const router = useRouter();
+  const { setTheme } = useTheme();
+
+  const handleStartSurvey = () => {
+    setTheme('light');
+    router.push('/dashboard');
+  };
 
   return (
     <div className="min-h-screen relative flex flex-col">
@@ -25,18 +32,11 @@ export default function Home() {
         <header className="w-full py-6 px-4 md:px-6">
           <div className="max-w-7xl mx-auto">
             <Image
-              src="/london-consulting-group-logo.png"
-              alt="London Consulting Group"
-              width={120}
-              height={48}
-              className="block dark:hidden"
-            />
-            <Image
               src="/londonlogodark.png"
               alt="London Consulting Group"
               width={120}
               height={48}
-              className="hidden dark:block"
+              className="block"
             />
           </div>
         </header>
@@ -77,7 +77,7 @@ export default function Home() {
             <div className="mt-12">
               <Button 
                 size="lg"
-                onClick={() => router.push('/dashboard')}
+                onClick={handleStartSurvey}
                 className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-white group"
               >
                 Iniciar Evaluación
