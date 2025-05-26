@@ -203,14 +203,20 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
       });
 
       if (!response.ok) {
-        throw new Error("Failed to generate report");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || "Failed to generate report");
       }
 
       const data = await response.json();
+      
+      if (!data || typeof data.report !== 'string') {
+        throw new Error("Formato de respuesta inválido");
+      }
+
       setReportText(data.report);
     } catch (err) {
-      setReportText("❌ Error al generar el análisis automático.");
-      console.error(err);
+      console.error("Error al generar el reporte:", err);
+      setReportText("❌ Error al generar el análisis automático. Por favor, intenta de nuevo.");
     } finally {
       setIsGeneratingReport(false);
     }
@@ -282,12 +288,14 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                   <StatsRingCard
                     label="Madurez Digital"
                     value={overallAverage}
+                    size="default"
                   />
                   {allPilarScores.map((pilar, idx) => (
                     <StatsRingCard
                       key={idx}
-                      label={PILAR_LABELS[pilar.name]}
+                      label={`${idx + 1}. ${PILAR_LABELS[pilar.name]}`}
                       value={pilar.average}
+                      size="default"
                     />
                   ))}
                 </div>
@@ -407,6 +415,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                       <StatsRingCard
                         label={PILAR_LABELS[pilar.name]}
                         value={pilar.average}
+                        size="large"
                       />
                     </div>
                     <div className="flex justify-center">
@@ -428,10 +437,15 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {pilar.categories.map((category, catIdx) => (
                         <Card key={catIdx} className="p-4">
-                          <h5 className="font-medium text-sm mb-2">
-                            {category.label}
+                          <h5 className="font-medium text-sm mb-2 flex items-start gap-2">
+                            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">
+                              {catIdx + 1}
+                            </span>
+                            <span className="flex-1">
+                              {category.label}
+                            </span>
                           </h5>
-                          <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between pl-8">
                             <span className="text-2xl font-bold">
                               {category.value.toFixed(1)}
                             </span>

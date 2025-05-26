@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit);
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -99,5 +101,11 @@
 @media (max-width: 640px) {
   .bg-home {
     background-position: 60% center !important;
+  }
+}
+
+@layer components {
+  .font-outfit {
+    font-family: var(--font-outfit);
   }
 }

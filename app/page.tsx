@@ -63,8 +63,8 @@ export default function Home() {
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
                 <Brain className="w-10 h-10 mb-4 text-primary" />
-                <h3 className="text-lg font-semibold mb-2">IA Avanzada</h3>
-                <p className="text-sm text-white/80">Análisis impulsado por inteligencia artificial</p>
+                <h3 className="text-lg font-semibold mb-2">Resultados Inmediatos</h3>
+                <p className="text-sm text-white/80">Análisis impulsado por IA</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
                 <Lightbulb className="w-10 h-10 mb-4 text-primary" />
