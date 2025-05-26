@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useSurvey } from "@/lib/context/survey-context";
@@ -10,6 +11,7 @@ interface SurveyHeaderProps {
 
 export function SurveyHeader({ totalSteps }: SurveyHeaderProps) {
   const { step, setStep } = useSurvey();
+  const headerId = useId();
 
   return (
     <Card className="mb-6">
@@ -17,7 +19,7 @@ export function SurveyHeader({ totalSteps }: SurveyHeaderProps) {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 className="text-xl md:text-2xl font-bold break-words">Encuesta de Madurez Digital</h1>
-            <p className="text-muted-foreground mt-1">
+            <p className="text-muted-foreground mt-1" suppressHydrationWarning>
               Paso {step} de {totalSteps}
             </p>
           </div>
@@ -28,22 +30,27 @@ export function SurveyHeader({ totalSteps }: SurveyHeaderProps) {
               onClick={() => setStep(Math.max(1, step - 1))}
               disabled={step === 1}
               className="w-full sm:w-auto"
+              suppressHydrationWarning
             >
               Anterior
             </Button>
             
             <div className="flex space-x-1">
-              {Array.from({ length: totalSteps }, (_, i) => (
-                <Button
-                  key={i + 1}
-                  variant={step === i + 1 ? "default" : step > i + 1 ? "secondary" : "outline"}
-                  size="sm"
-                  onClick={() => setStep(i + 1)}
-                  className="w-8 h-8 p-0"
-                >
-                  {i + 1}
-                </Button>
-              ))}
+              {Array.from({ length: totalSteps }, (_, i) => {
+                const stepId = `${headerId}-step-${i + 1}`;
+                return (
+                  <Button
+                    key={stepId}
+                    variant={step === i + 1 ? "default" : step > i + 1 ? "secondary" : "outline"}
+                    size="sm"
+                    onClick={() => setStep(i + 1)}
+                    className="w-8 h-8 p-0"
+                    suppressHydrationWarning
+                  >
+                    {i + 1}
+                  </Button>
+                );
+              })}
             </div>
             
             <Button
@@ -51,6 +58,7 @@ export function SurveyHeader({ totalSteps }: SurveyHeaderProps) {
               onClick={() => setStep(Math.min(totalSteps, step + 1))}
               disabled={step === totalSteps}
               className="w-full sm:w-auto"
+              suppressHydrationWarning
             >
               Siguiente
             </Button>
@@ -63,6 +71,7 @@ export function SurveyHeader({ totalSteps }: SurveyHeaderProps) {
             <div 
               className="bg-primary h-full transition-all duration-300 ease-in-out"
               style={{ width: `${(step / totalSteps) * 100}%` }}
+              suppressHydrationWarning
             />
           </div>
         </div>

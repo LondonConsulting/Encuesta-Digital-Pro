@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -44,6 +44,7 @@ interface SurveyFormProps {
 export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }: SurveyFormProps) {
   const { userAnswers, updateAnswers } = useSurvey();
   const [localAnswers, setLocalAnswers] = useState<Record<string, string | number>>({});
+  const formId = useId();
 
   const currentPage = surveyData.pages[currentPageIndex];
 
@@ -58,56 +59,64 @@ export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }:
 
   const renderQuestion = (question: SurveyQuestion) => {
     const currentValue = localAnswers[question.name] || userAnswers[question.name] || "";
+    const questionId = `${formId}-${question.name}`;
 
     switch (question.type) {
       case "text":
         return (
-          <div key={question.name} className="space-y-2">
-            <Label htmlFor={question.name}>{question.title}</Label>
+          <div key={questionId} className="space-y-2">
+            <Label htmlFor={questionId}>{question.title}</Label>
             <Input
-              id={question.name}
+              id={questionId}
               value={currentValue as string}
               onChange={(e) => handleInputChange(question.name, e.target.value)}
               required={question.isRequired}
+              suppressHydrationWarning
             />
           </div>
         );
 
       case "textarea":
         return (
-          <div key={question.name} className="space-y-2">
-            <Label htmlFor={question.name}>{question.title}</Label>
+          <div key={questionId} className="space-y-2">
+            <Label htmlFor={questionId}>{question.title}</Label>
             <Textarea
-              id={question.name}
+              id={questionId}
               value={currentValue as string}
               onChange={(e) => handleInputChange(question.name, e.target.value)}
               required={question.isRequired}
+              suppressHydrationWarning
             />
           </div>
         );
 
       case "radiogroup":
         return (
-          <div key={question.name} className="space-y-4">
+          <div key={questionId} className="space-y-4">
             <Label className="text-base font-medium">{question.title}</Label>
             <RadioGroup
               value={currentValue.toString()}
               onValueChange={(value) => handleInputChange(question.name, parseInt(value) || value)}
+              suppressHydrationWarning
             >
-              {question.choices?.map((choice, index) => (
-                <div key={index} className="flex items-start space-x-2">
-                  <RadioGroupItem 
-                    value={choice.value.toString()} 
-                    id={`${question.name}-${choice.value}`}
-                  />
-                  <Label 
-                    htmlFor={`${question.name}-${choice.value}`}
-                    className="text-sm leading-relaxed cursor-pointer"
-                  >
-                    {choice.text}
-                  </Label>
-                </div>
-              ))}
+              {question.choices?.map((choice) => {
+                const choiceId = `${questionId}-${choice.value}`;
+                return (
+                  <div key={choiceId} className="flex items-start space-x-2">
+                    <RadioGroupItem 
+                      value={choice.value.toString()} 
+                      id={choiceId}
+                      suppressHydrationWarning
+                    />
+                    <Label 
+                      htmlFor={choiceId}
+                      className="text-sm leading-relaxed cursor-pointer"
+                    >
+                      {choice.text}
+                    </Label>
+                  </div>
+                );
+              })}
             </RadioGroup>
           </div>
         );
@@ -118,10 +127,12 @@ export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }:
   };
 
   const renderElement = (element: SurveyQuestion | SurveyPanel) => {
+    const elementId = `${formId}-${element.name}`;
+    
     if (element.type === "panel") {
       const panel = element as SurveyPanel;
       return (
-        <Card key={panel.name} className="mb-6">
+        <Card key={elementId} className="mb-6">
           <CardHeader>
             <CardTitle className="text-lg">{panel.title}</CardTitle>
           </CardHeader>
@@ -132,7 +143,7 @@ export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }:
       );
     } else {
       return (
-        <Card key={element.name} className="mb-6">
+        <Card key={elementId} className="mb-6">
           <CardContent className="pt-6">
             {renderQuestion(element as SurveyQuestion)}
           </CardContent>
@@ -163,6 +174,7 @@ export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }:
           onClick={onPrevious}
           disabled={currentPageIndex === 0}
           className="w-full sm:w-auto"
+          suppressHydrationWarning
         >
           Anterior
         </Button>
@@ -170,6 +182,7 @@ export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }:
         <Button 
           onClick={handleNext}
           className="w-full sm:w-auto"
+          suppressHydrationWarning
         >
           {currentPageIndex === surveyData.pages.length - 1 ? "Finalizar" : "Siguiente"}
         </Button>
