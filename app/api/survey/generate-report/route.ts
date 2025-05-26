@@ -35,7 +35,7 @@ function getNivelMadurez(score: number): string {
 export async function POST(request: NextRequest) {
   try {
     const respuestas = await request.json();
-    const empresa = respuestas.Nombre || "la empresa evaluada";
+    const empresa = respuestas.Empresa || "la empresa evaluada";
 
     // Calcular nivel de madurez para cada categoría
     const resultadosConNivel = Object.entries(respuestas).reduce((acc: Record<string, any>, [key, value]) => {
@@ -68,13 +68,16 @@ Genera un análisis interpretativo que incluya:
 [Interpreta el nivel actual de la empresa basado en los resultados, explicando en qué nivel se encuentra (Básico, Emergente, etc.) y por qué]
 
 **Análisis por Pilar**
-[Para cada pilar relevante]
-- **[Nombre del Pilar]**: [Interpreta el nivel de madurez actual y explica las características que exhibe la empresa en este pilar según su nivel]
+[Para cada pilar en orden]
+- **1. Estrategia**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
+- **2. Tecnología**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
+- **3. Analítica de Datos**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
+- **4. Gente y Liderazgo**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
 
 **Próximos Pasos**
 [2-3 recomendaciones específicas para avanzar al siguiente nivel de madurez, enfocándose en las áreas más críticas]
 
-Enfócate en interpretar el significado de cada nivel y cómo se manifiesta en la organización, en lugar de solo mencionar números.
+Enfócate en interpretar el significado de cada nivel y cómo se manifiesta en la organización, en lugar de solo mencionar números. El análisis debe ser estrictamente sobre la empresa y sus capacidades organizacionales.
 `.trim();
 
     const completion = await openai.chat.completions.create({

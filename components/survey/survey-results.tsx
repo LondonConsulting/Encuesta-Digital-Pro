@@ -264,10 +264,10 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
         <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
           <TabsTrigger value="resumen" className="text-sm sm:text-base">Resumen</TabsTrigger>
           <TabsTrigger value="analisis" className="text-sm sm:text-base">Análisis</TabsTrigger>
-          <TabsTrigger value="estrategia" className="text-sm sm:text-base">Estrategia</TabsTrigger>
-          <TabsTrigger value="tecnologia" className="text-sm sm:text-base">Tecnología</TabsTrigger>
-          <TabsTrigger value="analitica" className="text-sm sm:text-base">Analítica</TabsTrigger>
-          <TabsTrigger value="gente" className="text-sm sm:text-base">Gente</TabsTrigger>
+          <TabsTrigger value="estrategia" className="text-sm sm:text-base">1. Estrategia</TabsTrigger>
+          <TabsTrigger value="tecnologia" className="text-sm sm:text-base">2. Tecnología</TabsTrigger>
+          <TabsTrigger value="analitica" className="text-sm sm:text-base">3. Analítica</TabsTrigger>
+          <TabsTrigger value="gente" className="text-sm sm:text-base">4. Gente</TabsTrigger>
         </TabsList>
 
         <TabsContent value="resumen" className="space-y-6">
