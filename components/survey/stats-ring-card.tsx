@@ -22,17 +22,27 @@ export function StatsRingCard({ label, value, size = "default" }: StatsRingCardP
   const circumference = 2 * Math.PI * radius;
   const strokeDasharray = `${(percentage / 100) * circumference} ${circumference}`;
 
+  const getMaturityLevel = (val: number) => {
+    if (val > 4.5) return "05. Óptimo";
+    if (val > 3.5) return "04. Avanzado";
+    if (val > 2.5) return "03. Intermedio";
+    if (val > 1.5) return "02. Inicial";
+    return "01. Básico";
+  };
+
   const getColor = (val: number) => {
-    if (val >= 4) return "text-green-600";
-    if (val >= 3) return "text-yellow-600";
-    if (val >= 2) return "text-orange-600";
+    if (val > 4.5) return "text-green-600";
+    if (val > 3.5) return "text-lime-600";
+    if (val > 2.5) return "text-yellow-600";
+    if (val > 1.5) return "text-orange-600";
     return "text-red-600";
   };
 
   const getRingColor = (val: number) => {
-    if (val >= 4) return "stroke-green-600";
-    if (val >= 3) return "stroke-yellow-600";
-    if (val >= 2) return "stroke-orange-600";
+    if (val > 4.5) return "stroke-green-600";
+    if (val > 3.5) return "stroke-lime-600";
+    if (val > 2.5) return "stroke-yellow-600";
+    if (val > 1.5) return "stroke-orange-600";
     return "stroke-red-600";
   };
 
@@ -83,7 +93,7 @@ export function StatsRingCard({ label, value, size = "default" }: StatsRingCardP
             />
           </svg>
           {/* Center text */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className={cn(
               "font-bold",
               isLarge ? "text-4xl" : "text-2xl",
@@ -94,17 +104,23 @@ export function StatsRingCard({ label, value, size = "default" }: StatsRingCardP
           </div>
         </div>
         <h3 className={cn(
-          "font-medium text-center text-gray-700 dark:text-gray-300",
+          "font-medium text-center text-foreground",
           isLarge ? "text-lg" : "text-sm"
         )}>
           {label}
         </h3>
-        <p className={cn(
-          "text-gray-500",
-          isLarge ? "text-sm mt-2" : "text-xs mt-1"
+        <div className={cn(
+          "text-center",
+          isLarge ? "text-base mt-2" : "text-xs mt-1"
         )}>
-          {percentage.toFixed(0)}%
-        </p>
+          <span className="text-muted-foreground">Nivel: </span>
+          <span className={cn(
+            "font-semibold",
+            getColor(value)
+          )}>
+            {getMaturityLevel(value)}
+          </span>
+        </div>
       </CardContent>
     </Card>
   );

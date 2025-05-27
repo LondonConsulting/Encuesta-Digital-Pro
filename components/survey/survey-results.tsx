@@ -15,14 +15,14 @@ import { Download } from "lucide-react";
 const CATEGORIES = {
   Pilar1: {
     "Visión Digital": [
-      "revision_vision_digital",
       "vision_digital_definida",
       "vision_digital_documentada",
+      "revision_vision_digital",
     ],
     "Alineación Estratégica": [
-      "integracion_planeacion",
       "alineacion_estrategica",
       "evaluacion_impacto_digital",
+      "integracion_planeacion",
     ],
     "Technology Roadmap": [
       "roadmap_tecnologico",
@@ -44,6 +44,7 @@ const CATEGORIES = {
     "Infraestructura Tecnológica": [
       "estado_infraestructura",
       "conectividad_redes",
+      "plataformas_hardware",
     ],
     "Metodologías Digitales": [
       "presencia_metodologias_innovacion",
@@ -65,14 +66,14 @@ const CATEGORIES = {
     ],
     "Tecnologías Emergentes": [
       "exploracion_tecnologias",
-      "escalamiento_tecnologias",
       "pilotos_tecnologias",
+      "escalamiento_tecnologias",
     ],
   },
   Pilar3: {
     "Gobierno de Datos": [
-      "control_acceso_datos",
       "politicas_gestion_datos",
+      "control_acceso_datos",
       "calidad_datos",
     ],
     "Analítica de Negocio": [
@@ -90,7 +91,7 @@ const CATEGORIES = {
       "fluidez_intercambio_datos",
       "formalidad_arquitectura_datos",
     ],
-    Transaccionalidad: [
+    "Transaccionalidad": [
       "frecuencia_actualizacion_datos",
       "accesibilidad_trazabilidad_transacciones",
       "integracion_plataformas_transaccionales",
@@ -98,29 +99,29 @@ const CATEGORIES = {
   },
   Pilar4: {
     "Liderazgo Digital": [
-      "roles_lideres_transformacion_digital",
-      "compromiso_lideres_transformacion_digital",
-      "visibilidad_liderazgo_transformacion_digital",
+      "compromiso_liderazgo",
+      "visibilidad_liderazgo",
+      "claridad_roles_liderazgo",
     ],
     "Cultura Digital": [
-      "apertura_cambio_digital",
-      "comunicacion_interna_digital",
-      "involucramiento_colaboradores_digital",
+      "apertura_cambio",
+      "comunicacion_interna",
+      "participacion_personal",
     ],
     "Talento Digital": [
-      "evaluacion_competencias_digitales",
-      "capacitacion_competencias_digitales",
-      "atraccion_talento_digital",
+      "capacitacion_habilidades",
+      "evaluacion_competencias",
+      "atraccion_retencion_talento",
     ],
     "Gobernanza del Cambio": [
-      "objetivos_cambio_digital",
-      "estructuras_responsables_cambio_digital",
-      "involucramiento_areas_cambio_digital",
+      "estructuras_gobernanza",
+      "participacion_interdepartamental",
+      "metricas_objetivos_cambio",
     ],
     "Gestión del Cambio": [
-      "acompanamiento_personal_cambio_digital",
-      "metodologia_gestion_cambio",
-      "impacto_cambio_digital",
+      "aplicacion_metodologias",
+      "comunicacion_acompanamiento",
+      "medicion_impacto_humano",
     ],
   },
 };
@@ -130,6 +131,14 @@ const PILAR_LABELS = {
   Pilar2: "Tecnología",
   Pilar3: "Analítica de datos",
   Pilar4: "Gente y Liderazgo",
+};
+
+const MATURITY_LEVELS = {
+  1: "01. Básico",
+  2: "02. Inicial",
+  3: "03. Intermedio",
+  4: "04. Avanzado",
+  5: "05. Óptimo"
 };
 
 const calculateCategoryAverages = (
@@ -255,11 +264,11 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
       </Card>
       <div className="relative z-10 h-full flex items-center justify-center pb-2">
         <div className="text-center">
-          <h2 className="text-4xl font-bold text-black mb-2">
+          <h2 className="text-4xl font-bold text-foreground mb-2">
             Resultados de Madurez Digital
           </h2>
           {userAnswers.Nombre && (
-            <p className="text-center text-lg text-black/90">
+            <p className="text-center text-lg text-foreground/90">
               {userAnswers.Nombre} - {userAnswers.Empresa}
             </p>
           )}
@@ -413,7 +422,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="flex justify-center items-start">
                       <StatsRingCard
-                        label={PILAR_LABELS[pilar.name]}
+                        label={`${idx + 1}. ${PILAR_LABELS[pilar.name]}`}
                         value={pilar.average}
                         size="large"
                       />
@@ -442,7 +451,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                               {catIdx + 1}
                             </span>
                             <span className="flex-1">
-                              {category.label}
+                            {category.label}
                             </span>
                           </h5>
                           <div className="flex items-center justify-between pl-8">

@@ -39,16 +39,16 @@ export function SurveyHeader({ totalSteps }: SurveyHeaderProps) {
               {Array.from({ length: totalSteps }, (_, i) => {
                 const stepId = `${headerId}-step-${i + 1}`;
                 return (
-                  <Button
+                <Button
                     key={stepId}
-                    variant={step === i + 1 ? "default" : step > i + 1 ? "secondary" : "outline"}
-                    size="sm"
-                    onClick={() => setStep(i + 1)}
-                    className="w-8 h-8 p-0"
+                  variant={step === i + 1 ? "default" : step > i + 1 ? "secondary" : "outline"}
+                  size="sm"
+                  onClick={() => setStep(i + 1)}
+                  className="w-8 h-8 p-0"
                     suppressHydrationWarning
-                  >
-                    {i + 1}
-                  </Button>
+                >
+                  {i + 1}
+                </Button>
                 );
               })}
             </div>

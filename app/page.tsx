@@ -70,20 +70,20 @@ export default function Home() {
                 <Lightbulb className="w-10 h-10 mb-4 text-primary" />
                 <h3 className="text-lg font-semibold mb-2">Recomendaciones</h3>
                 <p className="text-sm text-white/80">Insights accionables para tu transformación</p>
-              </div>
-            </div>
+          </div>
+        </div>
 
             {/* CTA Button */}
             <div className="mt-12">
-              <Button 
-                size="lg"
+          <Button 
+            size="lg"
                 onClick={handleStartSurvey}
                 className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-white group"
-              >
+          >
                 Iniciar Evaluación
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
+          </Button>
+        </div>
           </div>
         </main>
 

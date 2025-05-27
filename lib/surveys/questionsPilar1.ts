@@ -12,28 +12,15 @@ export const questionsPilar1 = {
             elements: [
               {
                 type: "radiogroup",
-                name: "revision_vision_digital",
-                title: "¿Cada cuánto tiempo se revisa y actualiza la visión digital para adaptarse al entorno tecnológico?",
-                isRequired: true,
-                choices: [
-                  { value: 1, text: "No existe una visión digital clara. Cada área opera de forma aislada." },
-                  { value: 2, text: "Existe una intención de digitalización, pero sin una visión formal." },
-                  { value: 3, text: "Existe una visión digital básica, alineada parcialmente al negocio." },
-                  { value: 4, text: "La visión digital está formalizada y alineada a la estrategia organizacional." },
-                  { value: 5, text: "La visión digital guía todas las áreas y se actualiza continuamente." }
-                ]
-              },
-              {
-                type: "radiogroup",
                 name: "vision_digital_definida",
                 title: "¿La organización tiene una visión digital claramente definida?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No existe una visión digital clara. Cada área opera de forma aislada." },
-                  { value: 2, text: "Existe una intención de digitalización, pero sin una visión formal." },
-                  { value: 3, text: "Existe una visión digital básica, alineada parcialmente al negocio." },
-                  { value: 4, text: "La visión digital está formalizada y alineada a la estrategia organizacional." },
-                  { value: 5, text: "La visión digital guía todas las áreas y se actualiza continuamente." }
+                  { value: 1, text: "1. No existe una visión digital clara. Cada área opera de forma aislada." },
+                  { value: 2, text: "2. Existe una intención de digitalización, pero sin una visión formal." },
+                  { value: 3, text: "3. Existe una visión digital básica, alineada parcialmente al negocio." },
+                  { value: 4, text: "4. La visión digital está formalizada y alineada a la estrategia organizacional." },
+                  { value: 5, text: "5. La visión digital guía todas las áreas y se actualiza continuamente." }
                 ]
               },
               {
@@ -42,15 +29,29 @@ export const questionsPilar1 = {
                 title: "¿La visión digital está formalmente documentada y es conocida por todos los niveles de la organización?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No existe una visión digital clara. Cada área opera de forma aislada." },
-                  { value: 2, text: "Existe una intención de digitalización, pero sin una visión formal." },
-                  { value: 3, text: "Existe una visión digital básica, alineada parcialmente al negocio." },
-                  { value: 4, text: "La visión digital está formalizada y alineada a la estrategia organizacional." },
-                  { value: 5, text: "La visión digital guía todas las áreas y se actualiza continuamente." }
+                  { value: 1, text: "1. La visión digital no está documentada ni es conocida por el equipo." },
+                  { value: 2, text: "2. La visión digital existe como un borrador, pero no ha sido validada ni compartida ampliamente." },
+                  { value: 3, text: "3. La visión digital está documentada, pero solo la conocen los líderes o niveles directivos." },
+                  { value: 4, text: "4. La visión digital está documentada y ha sido comunicada a la mayoría de las áreas." },
+                  { value: 5, text: "5. La visión digital está bien documentada, actualizada y es conocida por todos los niveles." }
+                ]
+              },
+              {
+                type: "radiogroup",
+                name: "revision_vision_digital",
+                title: "¿Cada cuánto tiempo se revisa y actualiza la visión digital para adaptarse al entorno tecnológico?",
+                isRequired: true,
+                choices: [
+                  { value: 1, text: "1. La visión digital no se revisa ni se ha actualizado desde su creación." },
+                  { value: 2, text: "2. La visión digital se revisa esporádicamente, sin una periodicidad clara." },
+                  { value: 3, text: "3. La visión digital se revisa de forma periódica, aunque no siempre se actualiza." },
+                  { value: 4, text: "4. La visión digital se revisa y actualiza con regularidad, según cambios del entorno." },
+                  { value: 5, text: "5. La visión digital se revisa continuamente y se adapta de forma ágil." }
                 ]
               }
             ]
           },
+          
           {
             type: "panel",
             name: "alineacion_estrategica",
@@ -58,28 +59,15 @@ export const questionsPilar1 = {
             elements: [
               {
                 type: "radiogroup",
-                name: "integracion_planeacion",
-                title: "¿La estrategia digital está integrada al ciclo de planeación estratégica y operativa del negocio?",
-                isRequired: true,
-                choices: [
-                  { value: 1, text: "No se considera la estrategia digital en el proceso de planeación." },
-                  { value: 2, text: "La planeación digital ocurre de forma separada y sin coordinación con el resto del negocio." },
-                  { value: 3, text: "La estrategia digital participa parcialmente en el proceso de planeación, pero sin estructuras formales." },
-                  { value: 4, text: "El plan digital se formula de forma coordinada y con métodos consistentes dentro del proceso de planeación." },
-                  { value: 5, text: "La estrategia digital es parte estructural del planeamiento estratégico y operativo, desde su diseño hasta la ejecución." }
-                ]
-              },
-              {
-                type: "radiogroup",
                 name: "alineacion_estrategica",
                 title: "¿Las iniciativas digitales están alineadas con los objetivos estratégicos del negocio?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No existe relación entre la estrategia digital y la del negocio. Las iniciativas digitales son reactivas y aisladas." },
-                  { value: 2, text: "Existe intención de alinearlas, pero no hay mecanismos formales. Algunas iniciativas están parcialmente conectadas." },
-                  { value: 3, text: "La estrategia digital está parcialmente integrada a los objetivos del negocio. Hay procesos definidos pero no aplicados consistentemente." },
-                  { value: 4, text: "Existe una clara alineación entre ambas estrategias, con mecanismos establecidos y aplicados." },
-                  { value: 5, text: "La estrategia digital está completamente integrada y es un habilitador central de la estrategia del negocio." }
+                  { value: 1, text: "1. No existe relación entre la estrategia digital y la del negocio. Las iniciativas digitales son reactivas y aisladas." },
+                  { value: 2, text: "2. Existe intención de alinearlas, pero no hay mecanismos formales. Algunas iniciativas están parcialmente conectadas." },
+                  { value: 3, text: "3. La estrategia digital está parcialmente integrada a los objetivos del negocio. Hay procesos definidos pero no aplicados consistentemente." },
+                  { value: 4, text: "4. Existe una clara alineación entre ambas estrategias, con mecanismos establecidos y aplicados." },
+                  { value: 5, text: "5. La estrategia digital está completamente integrada y es un habilitador central de la estrategia del negocio." }
                 ]
               },
               {
@@ -88,11 +76,24 @@ export const questionsPilar1 = {
                 title: "¿Se evalúa el impacto de la estrategia digital en los resultados del negocio?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No se realiza ningún tipo de evaluación del impacto digital." },
-                  { value: 2, text: "Se realizan evaluaciones aisladas, sin una metodología clara ni seguimiento." },
-                  { value: 3, text: "Existen métricas y evaluaciones básicas que dan visibilidad al desempeño de las iniciativas digitales." },
-                  { value: 4, text: "El impacto digital es monitoreado con indicadores clave vinculados a los objetivos del negocio." },
-                  { value: 5, text: "La estrategia digital es gestionada con base en KPIs integrados a los tableros estratégicos del negocio." }
+                  { value: 1, text: "1. No se realiza ningún tipo de evaluación del impacto digital." },
+                  { value: 2, text: "2. Se realizan evaluaciones aisladas, sin una metodología clara ni seguimiento." },
+                  { value: 3, text: "3. Existen métricas y evaluaciones básicas que dan visibilidad al desempeño de las iniciativas digitales." },
+                  { value: 4, text: "4. El impacto digital es monitoreado con indicadores clave vinculados a los objetivos del negocio." },
+                  { value: 5, text: "5. La estrategia digital es gestionada con base en KPIs integrados a los tableros estratégicos del negocio." }
+                ]
+              },
+              {
+                type: "radiogroup",
+                name: "integracion_planeacion",
+                title: "¿La estrategia digital está integrada al ciclo de planeación estratégica y operativa del negocio?",
+                isRequired: true,
+                choices: [
+                  { value: 1, text: "1. No se considera la estrategia digital en el proceso de planeación." },
+                  { value: 2, text: "2. La planeación digital ocurre de forma separada y sin coordinación con el resto del negocio." },
+                  { value: 3, text: "3. La estrategia digital participa parcialmente en el proceso de planeación, pero sin estructuras formales." },
+                  { value: 4, text: "4. El plan digital se formula de forma coordinada y con métodos consistentes dentro del proceso de planeación." },
+                  { value: 5, text: "5. La estrategia digital es parte estructural del planeamiento estratégico y operativo, desde su diseño hasta la ejecución." }
                 ]
               }
             ]
@@ -108,11 +109,11 @@ export const questionsPilar1 = {
                 title: "¿La organización cuenta con un roadmap tecnológico formal y vigente?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No existe un roadmap tecnológico ni una clasificación de tecnologías en la organización." },
-                  { value: 2, text: "Hay iniciativas tecnológicas dispersas sin un roadmap formal o clasificación estructurada." },
-                  { value: 3, text: "Existe un roadmap básico y una clasificación incipiente, pero no se actualizan de forma sistemática." },
-                  { value: 4, text: "El roadmap está bien estructurado, alineado con las prioridades de negocio y con una taxonomía funcional." },
-                  { value: 5, text: "El roadmap y la taxonomía digital son herramientas estratégicas vivas, usadas para priorizar, innovar y gestionar tecnologías de forma proactiva." }
+                  { value: 1, text: "1. La organización no cuenta con un roadmap tecnológico." },
+                  { value: 2, text: "2. Existe un borrador de roadmap, pero no está vigente ni validado." },
+                  { value: 3, text: "3. La organización tiene un roadmap definido, pero no está integrado a la estrategia global." },
+                  { value: 4, text: "4. Existe un roadmap formal y vigente, alineado parcialmente con la estrategia." },
+                  { value: 5, text: "5. El roadmap tecnológico es formal, vigente y está completamente integrado a la estrategia organizacional." }
                 ]
               },
               {
@@ -121,11 +122,11 @@ export const questionsPilar1 = {
                 title: "¿Qué tan actualizado y alineado está el roadmap con las necesidades del negocio y las tendencias tecnológicas?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No existe un roadmap tecnológico ni una clasificación de tecnologías en la organización." },
-                  { value: 2, text: "Hay iniciativas tecnológicas dispersas sin un roadmap formal o clasificación estructurada." },
-                  { value: 3, text: "Existe un roadmap básico y una clasificación incipiente, pero no se actualizan de forma sistemática." },
-                  { value: 4, text: "El roadmap está bien estructurado, alineado con las prioridades de negocio y con una taxonomía funcional." },
-                  { value: 5, text: "El roadmap y la taxonomía digital son herramientas estratégicas vivas, usadas para priorizar, innovar y gestionar tecnologías de forma proactiva." }
+                  { value: 1, text: "1. El roadmap no está actualizado ni responde a las necesidades actuales del negocio." },
+                  { value: 2, text: "2. El roadmap se actualiza ocasionalmente, pero sin un enfoque claro hacia el negocio o la tecnología." },
+                  { value: 3, text: "3. El roadmap está relativamente actualizado y considera en parte las necesidades del negocio." },
+                  { value: 4, text: "4. El roadmap se actualiza con regularidad y está alineado con el negocio y tendencias clave." },
+                  { value: 5, text: "5. El roadmap está completamente alineado y evoluciona de forma continua con el negocio y el entorno." }
                 ]
               },
               {
@@ -134,11 +135,11 @@ export const questionsPilar1 = {
                 title: "¿Se utiliza una taxonomía digital para clasificar tecnologías y procesos en la organización?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No existe un roadmap tecnológico ni una clasificación de tecnologías en la organización." },
-                  { value: 2, text: "Hay iniciativas tecnológicas dispersas sin un roadmap formal o clasificación estructurada." },
-                  { value: 3, text: "Existe un roadmap básico y una clasificación incipiente, pero no se actualizan de forma sistemática." },
-                  { value: 4, text: "El roadmap está bien estructurado, alineado con las prioridades de negocio y con una taxonomía funcional." },
-                  { value: 5, text: "El roadmap y la taxonomía digital son herramientas estratégicas vivas, usadas para priorizar, innovar y gestionar tecnologías de forma proactiva." }
+                  { value: 1, text: "1. No se utiliza ninguna taxonomía digital en la organización." },
+                  { value: 2, text: "2. Existe una clasificación básica, pero no está estandarizada ni es conocida." },
+                  { value: 3, text: "3. Se cuenta con una taxonomía definida, pero su uso es parcial o limitado." },
+                  { value: 4, text: "4. La taxonomía está estandarizada y se utiliza de forma transversal." },
+                  { value: 5, text: "5. La taxonomía digital está integrada, actualizada y guía la gestión tecnológica." }
                 ]
               }
             ]
@@ -150,15 +151,28 @@ export const questionsPilar1 = {
             elements: [
               {
                 type: "radiogroup",
+                name: "evaluacion_madurez_tecnologia",
+                title: "¿Se evalúa la madurez de las tecnologías antes de adoptarlas?",
+                isRequired: true,
+                choices: [
+                  { value: 1, text: "1. No se evalúa la madurez de las tecnologías antes de implementarlas." },
+                  { value: 2, text: "2. La evaluación tecnológica es informal y no sigue un proceso definido." },
+                  { value: 3, text: "3. Se realiza una evaluación básica antes de adoptar nuevas tecnologías." },
+                  { value: 4, text: "4. La evaluación de madurez es parte del proceso de selección tecnológica." },
+                  { value: 5, text: "5. La evaluación de madurez tecnológica es sistemática, estructurada y estratégica." }
+                ]
+              },
+              {
+                type: "radiogroup",
                 name: "momento_incorporacion_tecnologia",
                 title: "¿La organización define el momento adecuado para incorporar nuevas tecnologías?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No se realiza ningún análisis sobre madurez, momento ni ciclo de vida de las tecnologías." },
-                  { value: 2, text: "Se hacen análisis informales o reactivos, sin una metodología o criterios establecidos." },
-                  { value: 3, text: "Existen criterios básicos para evaluar madurez y momento de adopción, pero no se aplican de forma consistente." },
-                  { value: 4, text: "Se cuenta con un enfoque estructurado para analizar la madurez y el impacto de nuevas tecnologías antes de adoptarlas." },
-                  { value: 5, text: "Se aplica una metodología avanzada y sistemática basada en curvas de madurez tecnológica y criterios de valor e impacto." }
+                  { value: 1, text: "1. La organización no define ni analiza el momento para adoptar nuevas tecnologías." },
+                  { value: 2, text: "2. A veces se considera el momento, pero sin un proceso o criterio claro." },
+                  { value: 3, text: "3. El momento de adopción se considera, aunque de forma limitada o poco consistente." },
+                  { value: 4, text: "4. La organización define estratégicamente el momento adecuado de adopción." },
+                  { value: 5, text: "5. El momento de adopción es gestionado de forma proactiva y adaptable." }
                 ]
               },
               {
@@ -167,24 +181,11 @@ export const questionsPilar1 = {
                 title: "¿Se consideran el ciclo de vida y el impacto esperado de las tecnologías al momento de su adopción?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No se realiza ningún análisis sobre madurez, momento ni ciclo de vida de las tecnologías." },
-                  { value: 2, text: "Se hacen análisis informales o reactivos, sin una metodología o criterios establecidos." },
-                  { value: 3, text: "Existen criterios básicos para evaluar madurez y momento de adopción, pero no se aplican de forma consistente." },
-                  { value: 4, text: "Se cuenta con un enfoque estructurado para analizar la madurez y el impacto de nuevas tecnologías antes de adoptarlas." },
-                  { value: 5, text: "Se aplica una metodología avanzada y sistemática basada en curvas de madurez tecnológica y criterios de valor e impacto." }
-                ]
-              },
-              {
-                type: "radiogroup",
-                name: "evaluacion_madurez_tecnologia",
-                title: "¿Se evalúa la madurez de las tecnologías antes de adoptarlas?",
-                isRequired: true,
-                choices: [
-                  { value: 1, text: "No se realiza ningún análisis sobre madurez, momento ni ciclo de vida de las tecnologías." },
-                  { value: 2, text: "Se hacen análisis informales o reactivos, sin una metodología o criterios establecidos." },
-                  { value: 3, text: "Existen criterios básicos para evaluar madurez y momento de adopción, pero no se aplican de forma consistente." },
-                  { value: 4, text: "Se cuenta con un enfoque estructurado para analizar la madurez y el impacto de nuevas tecnologías antes de adoptarlas." },
-                  { value: 5, text: "Se aplica una metodología avanzada y sistemática basada en curvas de madurez tecnológica y criterios de valor e impacto." }
+                  { value: 1, text: "1. No se considera el ciclo de vida ni el impacto esperado al adoptar tecnologías." },
+                  { value: 2, text: "2. Se consideran de forma parcial o intuitiva, sin metodología clara." },
+                  { value: 3, text: "3. Se considera el ciclo de vida tecnológico, pero no siempre el impacto integral." },
+                  { value: 4, text: "4. Se evalúan tanto el ciclo de vida como el impacto esperado antes de adoptar." },
+                  { value: 5, text: "5. La evaluación del ciclo de vida y del impacto es parte esencial de la gestión tecnológica." }
                 ]
               }
             ]
@@ -200,11 +201,11 @@ export const questionsPilar1 = {
                 title: "¿La estrategia digital considera la experiencia del cliente como un elemento clave?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No se considera la experiencia ni el valor digital como parte de la propuesta al cliente." },
-                  { value: 2, text: "Existen iniciativas digitales aisladas dentro de la propuesta de valor, pero sin una estructura clara." },
-                  { value: 3, text: "La propuesta digital está parcialmente integrada en el portafolio de valor, con esfuerzos en algunos canales y productos." },
-                  { value: 4, text: "La propuesta digital está bien integrada, con soluciones multicanal, medibles y alineadas a las expectativas del mercado." },
-                  { value: 5, text: "La propuesta digital es diferenciadora, altamente automatizada, personalizada y optimizada con base en resultados del mercado." }
+                  { value: 1, text: "1. La experiencia del cliente no forma parte de la estrategia digital." },
+                  { value: 2, text: "2. La experiencia del cliente se menciona, pero no se prioriza ni se gestiona." },
+                  { value: 3, text: "3. La experiencia del cliente es considerada en algunas iniciativas digitales." },
+                  { value: 4, text: "4. La estrategia digital integra la experiencia del cliente como eje relevante." },
+                  { value: 5, text: "5. La experiencia del cliente guía toda la estrategia digital de forma integral." }
                 ]
               },
               {
@@ -213,11 +214,11 @@ export const questionsPilar1 = {
                 title: "¿Qué tan digitalizados están los productos, servicios o canales de la propuesta de valor?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No se considera la experiencia ni el valor digital como parte de la propuesta al cliente." },
-                  { value: 2, text: "Existen iniciativas digitales aisladas dentro de la propuesta de valor, pero sin una estructura clara." },
-                  { value: 3, text: "La propuesta digital está parcialmente integrada en el portafolio de valor, con esfuerzos en algunos canales y productos." },
-                  { value: 4, text: "La propuesta digital está bien integrada, con soluciones multicanal, medibles y alineadas a las expectativas del mercado." },
-                  { value: 5, text: "La propuesta digital es diferenciadora, altamente automatizada, personalizada y optimizada con base en resultados del mercado." }
+                  { value: 1, text: "1. No hay digitalización en productos, servicios o canales." },
+                  { value: 2, text: "2. La digitalización es limitada y aplicada a casos aislados." },
+                  { value: 3, text: "3. Algunos productos, servicios o canales están digitalizados de forma funcional." },
+                  { value: 4, text: "4. La digitalización está bien integrada en la propuesta de valor." },
+                  { value: 5, text: "5. La propuesta de valor es principalmente digital y evoluciona constantemente." }
                 ]
               },
               {
@@ -226,11 +227,11 @@ export const questionsPilar1 = {
                 title: "¿Se monitorea el desempeño de la propuesta de valor digital en el mercado?",
                 isRequired: true,
                 choices: [
-                  { value: 1, text: "No se considera la experiencia ni el valor digital como parte de la propuesta al cliente." },
-                  { value: 2, text: "Existen iniciativas digitales aisladas dentro de la propuesta de valor, pero sin una estructura clara." },
-                  { value: 3, text: "La propuesta digital está parcialmente integrada en el portafolio de valor, con esfuerzos en algunos canales y productos." },
-                  { value: 4, text: "La propuesta digital está bien integrada, con soluciones multicanal, medibles y alineadas a las expectativas del mercado." },
-                  { value: 5, text: "La propuesta digital es diferenciadora, altamente automatizada, personalizada y optimizada con base en resultados del mercado." }
+                  { value: 1, text: "1. No se monitorea el desempeño digital en el mercado." },
+                  { value: 2, text: "2. El monitoreo es ocasional, sin indicadores definidos ni consistencia." },
+                  { value: 3, text: "3. Hay monitoreo parcial con algunos indicadores básicos." },
+                  { value: 4, text: "4. El desempeño digital se monitorea con indicadores estratégicos definidos." },
+                  { value: 5, text: "5. El monitoreo es continuo, profundo y alimenta decisiones estratégicas." }
                 ]
               }
             ]

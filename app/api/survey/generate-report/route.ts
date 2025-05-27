@@ -9,10 +9,10 @@ const openai = new OpenAI({
 
 const NIVELES_MADUREZ: Record<number, string> = {
   1: "Básico",
-  2: "Emergente",
+  2: "Inicial",
   3: "Intermedio",
   4: "Avanzado",
-  5: "Innovador"
+  5: "Óptimo"
 };
 
 async function readCsvContext() {
@@ -53,18 +53,22 @@ export async function POST(request: NextRequest) {
     const prompt = `
 Actúa como un consultor experto en transformación digital. Analiza los siguientes resultados de madurez digital de **${empresa}** considerando los siguientes niveles de madurez y sus rangos de calificación:
 
-01. Básico : Primeras etapas de transformación digital
-02. Emergente : Iniciativas digitales en desarrollo
-03. Intermedio : Transformación digital en proceso
-04. Avanzado : Alta madurez digital
-05. Innovador : Líder en transformación digital
+01. Básico (0.0 - 1.5): Sistemas locales y desconectados. Procesos manuales y fragmentados. Resistencia al cambio. Sistemas locales obsoletos.
+
+02. Inicial (1.51 - 2.5): Inicio de migración y herramientas básicas. Estandarización básica. Capacitación limitada. Operación híbrida (local y nube).
+
+03. Intermedio (2.51 - 3.5): Conectividad y operaciones en cloud. Optimización digital consolidada. Procesos integrados y automatizados. Adopción tecnológica avanzada. IoT y análisis predictivo.
+
+04. Avanzado (3.51 - 4.5): Gestión con cloud computing. Innovación y expansión. Procesos totalmente integrados. Cambio dinámico continuo. Machine learning y gemelos digitales.
+
+05. Óptimo (4.51 - 5.0): Gestión avanzada con cloud computing. Innovación continua. Digitalización total e inteligente. Adaptación constante al cambio. Machine learning y gemelos digitales avanzados.
 
 IMPORTANTE: Para determinar el nivel de madurez, utiliza ESTRICTAMENTE estos rangos de calificación:
-- Si la calificación está entre 0.0 y 1.5, corresponde al Nivel 01. Básico
-- Si la calificación está entre 1.6 y 2.5, corresponde al Nivel 02. Emergente
-- Si la calificación está entre 2.6 y 3.5, corresponde al Nivel 03. Intermedio
-- Si la calificación está entre 3.6 y 4.5, corresponde al Nivel 04. Avanzado
-- Si la calificación está entre 4.6 y 5.0, corresponde al Nivel 05. Innovador
+- Si la calificación es menor o igual a 1.5, corresponde al Nivel 01. Básico
+- Si la calificación es mayor a 1.5 y menor o igual a 2.5, corresponde al Nivel 02. Inicial
+- Si la calificación es mayor a 2.5 y menor o igual a 3.5, corresponde al Nivel 03. Intermedio
+- Si la calificación es mayor a 3.5 y menor o igual a 4.5, corresponde al Nivel 04. Avanzado
+- Si la calificación es mayor a 4.5, corresponde al Nivel 05. Óptimo
 
 Resultados de la evaluación:
 ${JSON.stringify(resultadosConNivel, null, 2)}
@@ -72,29 +76,30 @@ ${JSON.stringify(resultadosConNivel, null, 2)}
 Genera un análisis interpretativo que incluya:
 
 **Nivel de Madurez Digital**
-[Basándote ESTRICTAMENTE en los rangos de calificación proporcionados, determina el nivel actual de la empresa. IMPORTANTE: Siempre menciona el nivel con su número y la calificación exacta, por ejemplo "Nivel 03. Intermedio (3.2)" o "Nivel 01. Básico (1.3)". Explica por qué se encuentra en ese nivel]
+[Basándote ESTRICTAMENTE en los rangos de calificación proporcionados, determina el nivel actual de la empresa. IMPORTANTE: Siempre menciona el nivel con su número y la calificación exacta, por ejemplo "Nivel 03. Intermedio (3.2)" o "Nivel 01. Básico (1.3)". Explica por qué se encuentra en ese nivel basándote en las características descritas para cada nivel]
 
 **Análisis por Pilar**
-[Para cada pilar en orden. IMPORTANTE: Para cada pilar, menciona siempre el nivel con su número y la calificación exacta (ej: "Nivel 01. Básico (1.4)" o "Nivel 04. Avanzado (4.1)"). Asegúrate de que el nivel asignado corresponda EXACTAMENTE con los rangos definidos]
+[Para cada pilar en orden. IMPORTANTE: Para cada pilar, menciona siempre el nivel con su número y la calificación exacta (ej: "Nivel 01. Básico (1.4)" o "Nivel 04. Avanzado (4.1)"). Asegúrate de que el nivel asignado corresponda EXACTAMENTE con los rangos definidos y explica las características específicas que exhibe la organización según la descripción del nivel]
 - **1. Estrategia**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
 - **2. Tecnología**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
 - **3. Analítica de Datos**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
 - **4. Gente y Liderazgo**: [Interpreta el nivel de madurez actual y explica las características que exhibe la organización en este pilar]
 
 **Próximos Pasos**
-[2-3 recomendaciones específicas para avanzar al siguiente nivel de madurez, enfocándose en las áreas más críticas. Menciona específicamente el nivel actual y el siguiente usando sus números y rangos de calificación]
+[2-3 recomendaciones específicas para avanzar al siguiente nivel de madurez, enfocándose en las áreas más críticas. Menciona específicamente el nivel actual y el siguiente usando sus números y características específicas]
 
 Enfócate en interpretar el significado de cada nivel y cómo se manifiesta en la organización. SIEMPRE que menciones un nivel de madurez:
 1. Inclúyelo con su número (ej: "Nivel 03. Intermedio")
 2. Incluye la calificación exacta entre paréntesis
 3. Asegúrate de que el nivel asignado corresponda ESTRICTAMENTE a los rangos definidos
-4. Si una calificación es menor a 1.5, SIEMPRE debe ser clasificada como Nivel 01. Básico
+4. Si una calificación es menor a 1.0, SIEMPRE debe ser clasificada como Nivel 01. Básico
+5. Relaciona el análisis con las características específicas descritas para cada nivel
 
 El análisis debe ser estrictamente sobre la empresa y sus capacidades organizacionales.
 `.trim();
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-4o",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
     });
@@ -113,7 +118,7 @@ El análisis debe ser estrictamente sobre la empresa y sus capacidades organizac
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-        },
+      },
       }
     );
   } catch (error) {
@@ -127,7 +132,7 @@ El análisis debe ser estrictamente sobre la empresa y sus capacidades organizac
         status: 500,
         headers: {
           'Content-Type': 'application/json',
-        },
+      },
       }
     );
   }

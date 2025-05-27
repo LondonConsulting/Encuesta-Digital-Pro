@@ -103,18 +103,18 @@ export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }:
                 const choiceId = `${questionId}-${choice.value}`;
                 return (
                   <div key={choiceId} className="flex items-start space-x-2">
-                    <RadioGroupItem 
-                      value={choice.value.toString()} 
+                  <RadioGroupItem 
+                    value={choice.value.toString()} 
                       id={choiceId}
                       suppressHydrationWarning
-                    />
-                    <Label 
+                  />
+                  <Label 
                       htmlFor={choiceId}
-                      className="text-sm leading-relaxed cursor-pointer"
-                    >
-                      {choice.text}
-                    </Label>
-                  </div>
+                    className="text-sm leading-relaxed cursor-pointer"
+                  >
+                    {choice.text}
+                  </Label>
+                </div>
                 );
               })}
             </RadioGroup>

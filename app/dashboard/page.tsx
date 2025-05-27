@@ -37,7 +37,7 @@ export default function Page() {
                 />
               </div>
               <Separator orientation="vertical" className="mx-2 h-4" />
-              <BreadcrumbItem className="hidden md:block">
+            <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="#">
                   Encuesta de Madurez Digital
                 </BreadcrumbLink>
@@ -50,12 +50,12 @@ export default function Page() {
           </Breadcrumb>
         </div>
         <ThemeToggle />
-      </header>
-      <div className="flex-1 p-4">
-        <SurveyProvider>
-          <SurveyFlow />
-        </SurveyProvider>
-      </div>
+        </header>
+        <div className="flex-1 p-4">
+          <SurveyProvider>
+            <SurveyFlow />
+          </SurveyProvider>
+        </div>
     </>
   )
 }

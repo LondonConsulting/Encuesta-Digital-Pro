@@ -89,7 +89,7 @@ export function SurveyRadarChart({
               <RadarChart 
                 data={normalizedData} 
                 outerRadius="100%" 
-                margin={{ top: 40, right: 20, bottom: 20, left: 20 }}
+                margin={{ top: 20, right: 75, bottom: 35, left: 75 }}
               >
                 <ChartTooltip
                   cursor={false}
