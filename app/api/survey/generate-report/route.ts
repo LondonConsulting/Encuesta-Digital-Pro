@@ -114,7 +114,7 @@ Enfócate en interpretar el significado de cada nivel y cómo se manifiesta en l
 El análisis debe ser estrictamente sobre la empresa y sus capacidades organizacionales, utilizando el contexto proporcionado para dar un análisis más profundo y relevante.
 
 **¿Necesitas ayuda para implementar tu transformación digital?**
-Contáctanos en mexico@londoncg.com o visítanos en www.londoncg.com para descubrir cómo podemos ayudarte a alcanzar el siguiente nivel de madurez digital.
+Contáctanos en [mexico@londoncg.com](mailto:mexico@londoncg.com) o visítanos en [www.londoncg.com](https://www.londoncg.com) para descubrir cómo podemos ayudarte a alcanzar el siguiente nivel de madurez digital.
 `.trim();
 
     const completion = await openai.chat.completions.create({
