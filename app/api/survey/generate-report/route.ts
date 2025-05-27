@@ -19,7 +19,18 @@ async function readCsvContext() {
   try {
     const csvPath = path.join(process.cwd(), 'lib', 'prompt', 'ContextoGPT.csv');
     const csvContent = await readFile(csvPath, 'utf-8');
-    return csvContent;
+    // Parse CSV and only keep relevant columns
+    const lines = csvContent.split('\n');
+    const headers = lines[0].split(',');
+    const relevantColumns = ['Pregunta', 'Respuesta', 'Descripción', 'Nivel de respuesta (1 a 5)'];
+    const relevantIndices = relevantColumns.map(col => headers.indexOf(col));
+    
+    const relevantLines = lines.slice(1).map(line => {
+      const values = line.split(',');
+      return relevantIndices.map(idx => values[idx]).join(',');
+    });
+    
+    return relevantLines.join('\n');
   } catch (error) {
     console.error('Error reading CSV file:', error);
     return '';
@@ -71,7 +82,7 @@ IMPORTANTE: Para determinar el nivel de madurez, utiliza ESTRICTAMENTE estos ran
 - Si la calificación es mayor a 3.5 y menor o igual a 4.5, corresponde al Nivel 04. Avanzado
 - Si la calificación es mayor a 4.5, corresponde al Nivel 05. Óptimo
 
-A continuación, encontrarás el contexto completo de las preguntas y respuestas que se utilizaron para esta evaluación. Este contexto te ayudará a entender mejor el significado de cada respuesta y proporcionar un análisis más detallado:
+A continuación, encontrarás el contexto de las preguntas y respuestas que se utilizaron para esta evaluación:
 
 ${contextoCSV}
 
