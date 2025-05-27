@@ -184,7 +184,7 @@ export function SurveyForm({ surveyData, onNext, onPrevious, currentPageIndex }:
           className="w-full sm:w-auto"
           suppressHydrationWarning
         >
-          {currentPageIndex === surveyData.pages.length - 1 ? "Finalizar" : "Siguiente"}
+          {currentPageIndex === surveyData.pages.length - 1 && surveyData.title.includes("Pilar 4") ? "Finalizar" : "Siguiente"}
         </Button>
       </div>
     </div>

@@ -121,7 +121,7 @@ export const SurveyPDF = ({ data, reportText, companyName, userName }: SurveyPDF
       {/* Header con logo */}
       <View style={styles.header}>
         <Image 
-          src="/londonlogodark.png"
+          src="/london-consulting-group-logo.png"
           style={styles.logo}
         />
       </View>
