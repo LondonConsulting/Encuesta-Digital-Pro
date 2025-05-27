@@ -11,6 +11,7 @@ import { QuestionResponse } from "@/lib/models/survey";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { SurveyPDF } from './survey-pdf';
 import { Download } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
 
 const CATEGORIES = {
   Pilar1: {
@@ -337,11 +338,40 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                   </div>
                 </div>
               ) : (
-                <div className="prose max-w-none dark:prose-invert">
-                  <div 
-                    className="whitespace-pre-wrap [&>h2]:text-xl [&>h2]:font-bold [&>h2]:mt-4 [&>h2]:mb-2 [&_strong]:text-primary [&_strong]:font-semibold"
-                    dangerouslySetInnerHTML={{ __html: reportText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }}
-                  />
+                <div className="prose prose-lg max-w-none dark:prose-invert">
+                  <ReactMarkdown
+                    components={{
+                      h1: ({node, ...props}) => (
+                        <h1 className="text-2xl font-bold mt-8 mb-4 text-primary" {...props} />
+                      ),
+                      h2: ({node, ...props}) => (
+                        <h2 className="text-xl font-bold mt-6 mb-3 text-primary" {...props} />
+                      ),
+                      h3: ({node, ...props}) => (
+                        <h3 className="text-lg font-semibold mt-5 mb-2 text-primary" {...props} />
+                      ),
+                      p: ({node, ...props}) => (
+                        <p className="mb-4 leading-relaxed" {...props} />
+                      ),
+                      ul: ({node, ...props}) => (
+                        <ul className="list-disc pl-6 mb-4" {...props} />
+                      ),
+                      ol: ({node, ...props}) => (
+                        <ol className="list-decimal pl-6 mb-4" {...props} />
+                      ),
+                      li: ({node, ...props}) => (
+                        <li className="mb-2" {...props} />
+                      ),
+                      strong: ({node, ...props}) => (
+                        <strong className="text-primary font-semibold" {...props} />
+                      ),
+                      a: ({node, ...props}) => (
+                        <a className="text-primary underline hover:text-primary/80 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />
+                      ),
+                    }}
+                  >
+                    {reportText}
+                  </ReactMarkdown>
                 </div>
               )}
               <div className="mt-6 flex flex-col sm:flex-row gap-4">
