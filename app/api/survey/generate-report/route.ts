@@ -65,15 +65,15 @@ export async function POST(request: NextRequest) {
     const prompt = `
 Actúa como un consultor experto en transformación digital. Analiza los siguientes resultados de madurez digital de **${empresa}** considerando los siguientes niveles de madurez y sus rangos de calificación:
 
-01. Básico (0.0 - 1.5): Sistemas locales y desconectados. Procesos manuales y fragmentados. Resistencia al cambio. Sistemas locales obsoletos.
+01. Básico (≤ 1.5): Sistemas locales y desconectados. Procesos manuales y fragmentados. Resistencia al cambio. Sistemas locales obsoletos.
 
-02. Inicial (1.51 - 2.5): Inicio de migración y herramientas básicas. Estandarización básica. Capacitación limitada. Operación híbrida (local y nube).
+02. Inicial (> 1.5 y ≤ 2.5): Inicio de migración y herramientas básicas. Estandarización básica. Capacitación limitada. Operación híbrida (local y nube).
 
-03. Intermedio (2.51 - 3.5): Conectividad y operaciones en cloud. Optimización digital consolidada. Procesos integrados y automatizados. Adopción tecnológica avanzada. IoT y análisis predictivo.
+03. Intermedio (> 2.5 y ≤ 3.5): Conectividad y operaciones en cloud. Optimización digital consolidada. Procesos integrados y automatizados. Adopción tecnológica avanzada. IoT y análisis predictivo.
 
-04. Avanzado (3.51 - 4.5): Gestión con cloud computing. Innovación y expansión. Procesos totalmente integrados. Cambio dinámico continuo. Machine learning y gemelos digitales.
+04. Avanzado (> 3.5 y ≤ 4.5): Gestión con cloud computing. Innovación y expansión. Procesos totalmente integrados. Cambio dinámico continuo. Machine learning y gemelos digitales.
 
-05. Óptimo (4.51 - 5.0): Gestión avanzada con cloud computing. Innovación continua. Digitalización total e inteligente. Adaptación constante al cambio. Machine learning y gemelos digitales avanzados.
+05. Óptimo (> 4.5): Gestión avanzada con cloud computing. Innovación continua. Digitalización total e inteligente. Adaptación constante al cambio. Machine learning y gemelos digitales avanzados.
 
 IMPORTANTE: Para determinar el nivel de madurez, utiliza ESTRICTAMENTE estos rangos de calificación:
 - Si la calificación es menor o igual a 1.5, corresponde al Nivel 01. Básico
