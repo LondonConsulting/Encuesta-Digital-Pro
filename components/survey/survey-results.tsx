@@ -208,6 +208,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
           ...categoryResults,
           Nombre: userAnswers.Nombre,
           Empresa: userAnswers.Empresa,
+          TotalScore: parseFloat(overallAverage.toFixed(2))
         }),
       });
 

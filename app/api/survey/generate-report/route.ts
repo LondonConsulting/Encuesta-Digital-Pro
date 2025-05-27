@@ -92,7 +92,7 @@ ${JSON.stringify(resultadosConNivel, null, 2)}
 Genera un análisis interpretativo que incluya:
 
 **Nivel de Madurez Digital**
-[Basándote ESTRICTAMENTE en los rangos de calificación proporcionados y el contexto de las preguntas, determina el nivel actual de la empresa. IMPORTANTE: Siempre menciona el nivel con su número y la calificación exacta, por ejemplo "Nivel 03. Intermedio (3.2)" o "Nivel 01. Básico (1.3)". Explica por qué se encuentra en ese nivel basándote en las características descritas para cada nivel y el contexto de las preguntas]
+[Basándote ESTRICTAMENTE en los rangos de calificación proporcionados y el contexto de las preguntas, determina el nivel actual de la empresa usando el TotalScore proporcionado. IMPORTANTE: Siempre menciona el nivel con su número y la calificación exacta, por ejemplo "Nivel 03. Intermedio (3.2)" o "Nivel 01. Básico (1.3)". Explica por qué se encuentra en ese nivel basándote en las características descritas para cada nivel y el contexto de las preguntas]
 
 **Análisis por Pilar**
 [Para cada pilar en orden. IMPORTANTE: Para cada pilar, menciona siempre el nivel con su número y la calificación exacta (ej: "Nivel 01. Básico (1.4)" o "Nivel 04. Avanzado (4.1)"). Asegúrate de que el nivel asignado corresponda EXACTAMENTE con los rangos definidos y explica las características específicas que exhibe la organización según la descripción del nivel y el contexto de las preguntas]
