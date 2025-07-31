@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "Guardian Egyp";
+  src: url("../public/fonts/GuardianEgyp-Medium.woff") format("woff2"),
+    url("../public/fonts/GuardianEgyp-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Guardian Egyp";
+  src: url("../public/fonts/GuardianEgyp-Bold.woff2") format("woff2"),
+    url("../public/fonts/GuardianEgyp-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Guardian Egyp";
+  src: url("/fonts/GuardianEgyp-Regular.woff2") format("woff2"),
+    url("/fonts/GuardianEgyp-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Guardian Egyp";
+  src: url("../public/fonts/GuardianEgyp-Semibold.woff2") format("woff2"),
+    url("../public/fonts/GuardianEgyp-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "icomoon";
+  src: url("../public/fonts/icomoon.eot?3te0fv");
+  src: url("../public/fonts/icomoon.eot?3te0fv#iefix")
+      format("embedded-opentype"),
+    url("../public/fonts/icomoon.ttf?3te0fv") format("truetype"),
+    url("../public/fonts/icomoon.woff?3te0fv") format("woff"),
+    url("../public/fonts/icomoon.svg?3te0fv#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+  content: "\e905";
+}
+.icon-gente:before {
+  content: "\e902";
+}
+.icon-analitica:before {
+  content: "\e900";
+}
+.icon-estrategia:before {
+  content: "\e901";
+}
+.icon-resultados:before {
+  content: "\e903";
+}
+.icon-tecnologia:before {
+  content: "\e904";
+}

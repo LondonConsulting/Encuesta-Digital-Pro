@@ -8,10 +8,10 @@ import { StatsRingCard } from "./stats-ring-card";
 import { SurveyRadarChart } from "./survey-radar-chart";
 import { useSurvey } from "@/lib/context/survey-context";
 import { QuestionResponse } from "@/lib/models/survey";
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import { SurveyPDF } from './survey-pdf';
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { SurveyPDF } from "./survey-pdf";
 import { Download } from "lucide-react";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 const CATEGORIES = {
   Pilar1: {
@@ -92,7 +92,7 @@ const CATEGORIES = {
       "fluidez_intercambio_datos",
       "formalidad_arquitectura_datos",
     ],
-    "Transaccionalidad": [
+    Transaccionalidad: [
       "frecuencia_actualizacion_datos",
       "accesibilidad_trazabilidad_transacciones",
       "integracion_plataformas_transaccionales",
@@ -139,7 +139,7 @@ const MATURITY_LEVELS = {
   2: "02. Inicial",
   3: "03. Intermedio",
   4: "04. Avanzado",
-  5: "05. Óptimo"
+  5: "05. Óptimo",
 };
 
 const calculateCategoryAverages = (
@@ -161,7 +161,10 @@ interface SurveyResultsProps {
   savedSurveyId?: string | null;
 }
 
-export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps) {
+export function SurveyResults({
+  onNewSurvey,
+  savedSurveyId,
+}: SurveyResultsProps) {
   const { userAnswers } = useSurvey();
   const [reportText, setReportText] = useState("");
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
@@ -209,7 +212,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
           ...categoryResults,
           Nombre: userAnswers.Nombre,
           Empresa: userAnswers.Empresa,
-          TotalScore: parseFloat(overallAverage.toFixed(2))
+          TotalScore: parseFloat(overallAverage.toFixed(2)),
         }),
       });
 
@@ -219,15 +222,17 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
       }
 
       const data = await response.json();
-      
-      if (!data || typeof data.report !== 'string') {
+
+      if (!data || typeof data.report !== "string") {
         throw new Error("Formato de respuesta inválido");
       }
 
       setReportText(data.report);
     } catch (err) {
       console.error("Error al generar el reporte:", err);
-      setReportText("❌ Error al generar el análisis automático. Por favor, intenta de nuevo.");
+      setReportText(
+        "❌ Error al generar el análisis automático. Por favor, intenta de nuevo."
+      );
     } finally {
       setIsGeneratingReport(false);
     }
@@ -248,7 +253,8 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
             <div className="flex items-center space-x-2">
               <div className="h-4 w-4 rounded-full bg-green-500"></div>
               <p className="text-green-800">
-                ✅ Tu encuesta se ha guardado exitosamente (ID: {savedSurveyId.slice(-8)})
+                ✅ Tu encuesta se ha guardado exitosamente (ID:{" "}
+                {savedSurveyId.slice(-8)})
               </p>
             </div>
           </CardContent>
@@ -256,21 +262,14 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
       )}
 
       {/* Header */}
-      <Card className="relative h-60 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center z-0"
-          style={{
-            backgroundImage: `url('/london_digital.png')`,
-          }}
-        ></div>
-      </Card>
-      <div className="relative z-10 h-full flex items-center justify-center pb-2">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-2">
+      <div className="relative z-10 h-full pb-2">
+        <div>
+          <h2 className="text-3xl font-semibold text-foreground mb-2">
+            <i className="icon-resultados text-primaryalt me-4 text-[51px] relative top-3"></i>
             Resultados de Madurez Digital
           </h2>
           {userAnswers.Nombre && (
-            <p className="text-center text-lg text-foreground/90">
+            <p className="text-lg text-foreground/90">
               {userAnswers.Nombre} - {userAnswers.Empresa}
             </p>
           )}
@@ -278,19 +277,31 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
       </div>
 
       <Tabs defaultValue="resumen" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
-          <TabsTrigger value="resumen" className="text-sm sm:text-base">Resumen</TabsTrigger>
-          <TabsTrigger value="analisis" className="text-sm sm:text-base">Análisis</TabsTrigger>
-          <TabsTrigger value="estrategia" className="text-sm sm:text-base">1. Estrategia</TabsTrigger>
-          <TabsTrigger value="tecnologia" className="text-sm sm:text-base">2. Tecnología</TabsTrigger>
-          <TabsTrigger value="analitica" className="text-sm sm:text-base">3. Analítica</TabsTrigger>
-          <TabsTrigger value="gente" className="text-sm sm:text-base">4. Gente</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-gray-50">
+          <TabsTrigger value="resumen" className="text-sm sm:text-base">
+            Resumen
+          </TabsTrigger>
+          <TabsTrigger value="analisis" className="text-sm sm:text-base">
+            Análisis
+          </TabsTrigger>
+          <TabsTrigger value="estrategia" className="text-sm sm:text-base">
+            1. Estrategia
+          </TabsTrigger>
+          <TabsTrigger value="tecnologia" className="text-sm sm:text-base">
+            2. Tecnología
+          </TabsTrigger>
+          <TabsTrigger value="analitica" className="text-sm sm:text-base">
+            3. Analítica
+          </TabsTrigger>
+          <TabsTrigger value="gente" className="text-sm sm:text-base">
+            4. Gente
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="resumen" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Resumen General</CardTitle>
+              <CardTitle></CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -341,32 +352,49 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                 <div className="prose prose-lg max-w-none dark:prose-invert">
                   <ReactMarkdown
                     components={{
-                      h1: ({node, ...props}) => (
-                        <h1 className="text-2xl font-bold mt-8 mb-4 text-primary" {...props} />
+                      h1: ({ node, ...props }) => (
+                        <h1
+                          className="text-2xl font-bold mt-8 mb-4 text-primary"
+                          {...props}
+                        />
                       ),
-                      h2: ({node, ...props}) => (
-                        <h2 className="text-xl font-bold mt-6 mb-3 text-primary" {...props} />
+                      h2: ({ node, ...props }) => (
+                        <h2
+                          className="text-xl font-bold mt-6 mb-3 text-primary"
+                          {...props}
+                        />
                       ),
-                      h3: ({node, ...props}) => (
-                        <h3 className="text-lg font-semibold mt-5 mb-2 text-primary" {...props} />
+                      h3: ({ node, ...props }) => (
+                        <h3
+                          className="text-lg font-semibold mt-5 mb-2 text-primary"
+                          {...props}
+                        />
                       ),
-                      p: ({node, ...props}) => (
+                      p: ({ node, ...props }) => (
                         <p className="mb-4 leading-relaxed" {...props} />
                       ),
-                      ul: ({node, ...props}) => (
+                      ul: ({ node, ...props }) => (
                         <ul className="list-disc pl-6 mb-4" {...props} />
                       ),
-                      ol: ({node, ...props}) => (
+                      ol: ({ node, ...props }) => (
                         <ol className="list-decimal pl-6 mb-4" {...props} />
                       ),
-                      li: ({node, ...props}) => (
+                      li: ({ node, ...props }) => (
                         <li className="mb-2" {...props} />
                       ),
-                      strong: ({node, ...props}) => (
-                        <strong className="text-primary font-semibold" {...props} />
+                      strong: ({ node, ...props }) => (
+                        <strong
+                          className="text-primary font-semibold"
+                          {...props}
+                        />
                       ),
-                      a: ({node, ...props}) => (
-                        <a className="text-primary underline hover:text-primary/80 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />
+                      a: ({ node, ...props }) => (
+                        <a
+                          className="text-primary underline hover:text-primary/80 transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          {...props}
+                        />
                       ),
                     }}
                   >
@@ -376,11 +404,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
               )}
               <div className="mt-6 flex flex-col sm:flex-row gap-4">
                 {isGeneratingReport ? (
-                  <Button 
-                    size="lg"
-                    className="gap-2 w-full sm:w-auto"
-                    disabled
-                  >
+                  <Button size="lg" className="gap-2 w-full sm:w-auto" disabled>
                     <Download className="w-4 h-4" />
                     Generando reporte...
                   </Button>
@@ -388,15 +412,15 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                   <PDFDownloadLink
                     document={
                       <SurveyPDF
-                        data={allPilarScores.map(pilar => ({
+                        data={allPilarScores.map((pilar) => ({
                           pilarName: PILAR_LABELS[pilar.name],
                           average: pilar.average,
-                          categories: pilar.categories.map(cat => ({
+                          categories: pilar.categories.map((cat) => ({
                             label: cat.label,
-                            value: cat.value
-                          }))
+                            value: cat.value,
+                          })),
                         }))}
-                        reportText={reportText.replace(/<[^>]*>/g, '')}
+                        reportText={reportText.replace(/<[^>]*>/g, "")}
                         companyName={userAnswers.Empresa?.toString()}
                         userName={userAnswers.Nombre?.toString()}
                       />
@@ -404,19 +428,19 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                     fileName="reporte-madurez-digital.pdf"
                   >
                     {({ blob, url, loading, error }) => (
-                      <Button 
+                      <Button
                         size="lg"
                         className="gap-2 w-full sm:w-auto"
                         disabled={loading || !reportText}
                       >
                         <Download className="w-4 h-4" />
-                        {loading ? 'Generando PDF...' : 'Descargar PDF'}
+                        {loading ? "Generando PDF..." : "Descargar PDF"}
                       </Button>
                     )}
                   </PDFDownloadLink>
                 )}
-                <Button 
-                  onClick={onNewSurvey} 
+                <Button
+                  onClick={onNewSurvey}
                   variant="outline"
                   className="w-full sm:w-auto"
                 >
@@ -447,7 +471,7 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
             <TabsContent key={idx} value={tabValue} className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>{PILAR_LABELS[pilar.name]}</CardTitle>
+                  <CardTitle></CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -476,14 +500,15 @@ export function SurveyResults({ onNewSurvey, savedSurveyId }: SurveyResultsProps
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {pilar.categories.map((category, catIdx) => (
-                        <Card key={catIdx} className="p-4">
-                          <h5 className="font-medium text-sm mb-2 flex items-start gap-2">
+                        <Card
+                          key={catIdx}
+                          className="p-4 border rounded-2xl bg-white"
+                        >
+                          <h5 className="font-semibold text-sm mb-2 flex items-start gap-2">
                             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">
                               {catIdx + 1}
                             </span>
-                            <span className="flex-1">
-                            {category.label}
-                            </span>
+                            <span className="flex-1">{category.label}</span>
                           </h5>
                           <div className="flex items-center justify-between pl-8">
                             <span className="text-2xl font-bold">

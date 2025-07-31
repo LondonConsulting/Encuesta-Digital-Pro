@@ -34,39 +34,38 @@ export function SurveyFlow() {
   // Effect to scroll to top when page or step changes
   useEffect(() => {
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }, 100); // Small delay to ensure DOM updates are complete
   }, [currentPageIndex, step]);
 
   const saveSurveyData = async () => {
     try {
       setIsSaving(true);
-      
+
       const surveySubmission: SurveySubmission = {
         responses: userAnswers,
         metadata: {
           completionTime: Date.now(), // You can track actual completion time if needed
-        }
+        },
       };
 
-      const response = await fetch('/api/survey/save', {
-        method: 'POST',
+      const response = await fetch("/api/survey/save", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(surveySubmission),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to save survey data');
+        throw new Error("Failed to save survey data");
       }
 
       const result = await response.json();
       setSavedSurveyId(result.id);
-      console.log('✅ Survey saved successfully:', result.id);
-      
+      console.log("✅ Survey saved successfully:", result.id);
     } catch (error) {
-      console.error('❌ Error saving survey:', error);
+      console.error("❌ Error saving survey:", error);
       // You might want to show an error message to the user
       // For now, we'll continue with completion even if save fails
     } finally {
@@ -103,7 +102,7 @@ export function SurveyFlow() {
 
   if (isCompleted) {
     return (
-      <SurveyResults 
+      <SurveyResults
         onNewSurvey={() => {
           setIsCompleted(false);
           setStep(1);
@@ -123,7 +122,9 @@ export function SurveyFlow() {
             <div className="text-center space-y-4">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
               <p className="text-lg">Guardando tu encuesta...</p>
-              <p className="text-muted-foreground">Por favor espera un momento</p>
+              <p className="text-muted-foreground">
+                Por favor espera un momento
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -134,12 +135,32 @@ export function SurveyFlow() {
   return (
     <div className="container mx-auto px-4 sm:px-6 py-4">
       <SurveyHeader totalSteps={totalSteps} />
-      
+
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg md:text-xl break-words">{currentSurvey.title}</CardTitle>
-          {'description' in currentSurvey && currentSurvey.description && (
-            <p className="text-muted-foreground text-sm md:text-base">{currentSurvey.description}</p>
+          <CardTitle className="text-3xl break-words flex items-start">
+            {currentSurvey.title ===
+              "Pilar 1 - Estrategia y Definición de Valor" && (
+              <i className="icon-estrategia text-primaryalt me-4 text-[58px] relative -top-4"></i>
+            )}
+            {currentSurvey.title ===
+              "Pilar 2 - Tecnología y Automatización" && (
+              <i className="icon-tecnologia text-primaryalt me-4 text-[58px] relative -top-4"></i>
+            )}
+            {currentSurvey.title ===
+              "Pilar 3 - Gestión y Analítica de Datos" && (
+              <i className="icon-analitica text-primaryalt me-4 text-[58px] relative -top-4"></i>
+            )}
+            {currentSurvey.title ===
+              "Pilar 4 - Gente y Liderazgo para el Cambio" && (
+              <i className="icon-gente text-primaryalt me-4 text-[58px] relative -top-4"></i>
+            )}
+            {currentSurvey.title}
+          </CardTitle>
+          {"description" in currentSurvey && currentSurvey.description && (
+            <p className="text-muted-foreground text-sm md:text-base">
+              {currentSurvey.description}
+            </p>
           )}
         </CardHeader>
         <CardContent>
@@ -153,4 +174,4 @@ export function SurveyFlow() {
       </Card>
     </div>
   );
-} 
+}

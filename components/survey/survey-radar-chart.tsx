@@ -1,6 +1,12 @@
 "use client";
 
-import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart } from "recharts";
+import {
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+} from "recharts";
 import {
   Card,
   CardContent,
@@ -26,10 +32,10 @@ interface SurveyRadarChartProps {
   description?: string;
 }
 
-export function SurveyRadarChart({ 
-  data, 
-  title, 
-  description
+export function SurveyRadarChart({
+  data,
+  title,
+  description,
 }: SurveyRadarChartProps) {
   const chartConfig = {
     value: {
@@ -39,15 +45,15 @@ export function SurveyRadarChart({
   } satisfies ChartConfig;
 
   // Ensure data values are capped at 5
-  const normalizedData = data.map(item => ({
+  const normalizedData = data.map((item) => ({
     ...item,
-    value: Math.min(item.value, 5)
+    value: Math.min(item.value, 5),
   }));
 
   // Custom render function for axis labels to handle text wrapping
   const renderAxisTick = (props: any) => {
     const { x, y, payload } = props;
-    const words = payload.value.split(' ');
+    const words = payload.value.split(" ");
     const lineHeight = 10;
     const totalHeight = (words.length - 1) * lineHeight;
 
@@ -70,47 +76,49 @@ export function SurveyRadarChart({
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg">{title}</CardTitle>
+    <Card className="w-full border p-8 bg-white rounded-2xl">
+      <CardHeader className="pb-2 text-center">
+        <CardTitle className="text-xl">
+          {title === "Estrategia" && (
+            <i className="icon-estrategia text-[50px] text-primaryalt block"></i>
+          )}
+          {title === "Tecnología" && (
+            <i className="icon-tecnologia text-[50px] text-primaryalt block"></i>
+          )}
+          {title === "Analítica de datos" && (
+            <i className="icon-analitica text-[50px] text-primaryalt block"></i>
+          )}
+          {title === "Gente y Liderazgo" && (
+            <i className="icon-gente text-[50px] text-primaryalt block"></i>
+          )}
+          {title}
+        </CardTitle>
         {description && (
-          <CardDescription className="text-center">
-            {description}
-          </CardDescription>
+          <CardDescription className="text-base">{description}</CardDescription>
         )}
       </CardHeader>
       <CardContent className="pb-4">
         <div className="w-full h-[280px] flex items-center justify-center">
           <div className="w-full max-w-[400px] h-full">
-            <ChartContainer
-              config={chartConfig}
-              className="w-full h-full"
-            >
-              <RadarChart 
-                data={normalizedData} 
-                outerRadius="100%" 
+            <ChartContainer config={chartConfig} className="w-full h-full">
+              <RadarChart
+                data={normalizedData}
+                outerRadius="100%"
                 margin={{ top: 20, right: 75, bottom: 35, left: 75 }}
               >
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent indicator="line" />}
                 />
-                <PolarAngleAxis 
-                  dataKey="category" 
+                <PolarAngleAxis
+                  dataKey="category"
                   tick={renderAxisTick}
                   tickLine={false}
                   axisLine={false}
                   radius={10}
                 />
-                <PolarGrid 
-                  radialLines={true}
-                  gridType="polygon"
-                />
-                <PolarRadiusAxis
-                  angle={90}
-                  domain={[0, 5]}
-                  tick={false}
-                />
+                <PolarGrid radialLines={true} gridType="polygon" />
+                <PolarRadiusAxis angle={90} domain={[0, 5]} tick={false} />
                 <Radar
                   dataKey="value"
                   fill="var(--color-value)"
@@ -126,4 +134,4 @@ export function SurveyRadarChart({
       </CardContent>
     </Card>
   );
-} 
+}
