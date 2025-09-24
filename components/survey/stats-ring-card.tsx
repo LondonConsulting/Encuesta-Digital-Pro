@@ -53,9 +53,16 @@ export function StatsRingCard({
   };
 
   return (
-    <Card className={cn("w-full border rounded-2xl bg-white")}>
+    <Card
+      className={cn(
+        "w-full border rounded-2xl bg-white dark:bg-background h-full flex items-center"
+      )}
+    >
       <CardContent
-        className={cn("flex flex-col items-center", isLarge ? "p-8" : "p-6")}
+        className={cn(
+          "flex flex-col items-center w-full",
+          isLarge ? "p-8" : "p-6"
+        )}
       >
         <div
           className={cn(

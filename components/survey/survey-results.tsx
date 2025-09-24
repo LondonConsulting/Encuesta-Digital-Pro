@@ -277,7 +277,7 @@ export function SurveyResults({
       </div>
 
       <Tabs defaultValue="resumen" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-gray-50">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 bg-gray-50 dark:bg-border">
           <TabsTrigger value="resumen" className="text-sm sm:text-base">
             Resumen
           </TabsTrigger>
@@ -502,7 +502,7 @@ export function SurveyResults({
                       {pilar.categories.map((category, catIdx) => (
                         <Card
                           key={catIdx}
-                          className="p-4 border rounded-2xl bg-white"
+                          className="p-4 border rounded-2xl bg-white dark:bg-background"
                         >
                           <h5 className="font-semibold text-sm mb-2 flex items-start gap-2">
                             <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">

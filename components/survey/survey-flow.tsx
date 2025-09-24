@@ -22,7 +22,7 @@ const surveys = [
 ];
 
 export function SurveyFlow() {
-  const { step, setStep, userAnswers } = useSurvey();
+  const { step, setStep, userAnswers, updateAnswers } = useSurvey();
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -73,25 +73,22 @@ export function SurveyFlow() {
     }
   };
 
-  const handleNext = async () => {
+  const handleNext = async (pageAnswers: Record<string, string | number>) => {
+    updateAnswers(pageAnswers);
+
     if (currentPageIndex < currentSurvey.pages.length - 1) {
-      setCurrentPageIndex(currentPageIndex + 1);
+      setCurrentPageIndex((prev) => prev + 1);
+    } else if (step < totalSteps) {
+      setStep(step + 1);
+      setCurrentPageIndex(0);
     } else {
-      // Move to next survey
-      if (step < totalSteps) {
-        setStep(step + 1);
-        setCurrentPageIndex(0);
-      } else {
-        // Survey completed - save to MongoDB before showing results
-        await saveSurveyData();
-        setIsCompleted(true);
-      }
+      saveSurveyData().then(() => setIsCompleted(true));
     }
   };
 
   const handlePrevious = () => {
     if (currentPageIndex > 0) {
-      setCurrentPageIndex(currentPageIndex - 1);
+      setCurrentPageIndex((prev) => prev - 1);
     } else if (step > 1) {
       // Move to previous survey
       setStep(step - 1);
@@ -169,6 +166,7 @@ export function SurveyFlow() {
             onNext={handleNext}
             onPrevious={handlePrevious}
             currentPageIndex={currentPageIndex}
+            step={step}
           />
         </CardContent>
       </Card>

@@ -39,6 +39,7 @@ interface SurveyFormProps {
   onNext: () => void;
   onPrevious: () => void;
   currentPageIndex: number;
+  step: number;
 }
 
 export function SurveyForm({
@@ -46,6 +47,7 @@ export function SurveyForm({
   onNext,
   onPrevious,
   currentPageIndex,
+  step,
 }: SurveyFormProps) {
   const { userAnswers, updateAnswers } = useSurvey();
   const [localAnswers, setLocalAnswers] = useState<
@@ -59,7 +61,34 @@ export function SurveyForm({
     setLocalAnswers((prev) => ({ ...prev, [name]: value }));
   };
 
+  const [errors, setErrors] = useState<string[]>([]);
+  const required_msg = "Campo requerido";
+
   const handleNext = () => {
+    const missing: string[] = [];
+
+    currentPage.elements.forEach((el) => {
+      const questions =
+        el.type === "panel"
+          ? (el as SurveyPanel).elements
+          : [el as SurveyQuestion];
+
+      questions.forEach((q) => {
+        if (q.isRequired) {
+          const value = localAnswers[q.name] ?? userAnswers[q.name];
+          if (!value || value.toString().trim() === "") {
+            missing.push(q.name);
+          }
+        }
+      });
+    });
+
+    if (missing.length > 0) {
+      setErrors(missing);
+      return;
+    }
+
+    setErrors([]);
     updateAnswers(localAnswers);
     onNext();
   };
@@ -83,6 +112,9 @@ export function SurveyForm({
               required={question.isRequired}
               suppressHydrationWarning
             />
+            {errors.includes(question.name) && (
+              <p className="text-red-500 text-sm">{required_msg}</p>
+            )}
           </div>
         );
 
@@ -97,6 +129,9 @@ export function SurveyForm({
               required={question.isRequired}
               suppressHydrationWarning
             />
+            {errors.includes(question.name) && (
+              <p className="text-red-500 text-sm">{required_msg}</p>
+            )}
           </div>
         );
 
@@ -130,6 +165,9 @@ export function SurveyForm({
                 );
               })}
             </RadioGroup>
+            {errors.includes(question.name) && (
+              <p className="text-red-500 text-sm">{required_msg}</p>
+            )}
           </div>
         );
 
@@ -186,18 +224,13 @@ export function SurveyForm({
         <Button
           variant="outline"
           onClick={onPrevious}
-          disabled={currentPageIndex === 0}
+          disabled={currentPageIndex === 0 && step === 1}
           className="w-full sm:w-auto"
-          suppressHydrationWarning
         >
           Anterior
         </Button>
 
-        <Button
-          onClick={handleNext}
-          className="w-full sm:w-auto"
-          suppressHydrationWarning
-        >
+        <Button onClick={handleNext} className="w-full sm:w-auto">
           {currentPageIndex === surveyData.pages.length - 1 &&
           surveyData.title.includes("Pilar 4")
             ? "FINALIZAR"

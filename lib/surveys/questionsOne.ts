@@ -1,9 +1,9 @@
 import { Model } from "survey-core";
 
 export const questionsone = {
-    "title": "Madurez Digital",
-    "description": "Encuesta para evaluar la madurez digital de tu empresa.",
-    pages: [
+  title: "Madurez Digital",
+  description: "Encuesta para evaluar la madurez digital de tu empresa.",
+  pages: [
     {
       name: "PersonalDetails",
       elements: [
@@ -11,11 +11,13 @@ export const questionsone = {
           type: "text",
           name: "Nombre",
           title: "Nombre Completo:",
+          isRequired: true,
         },
         {
           type: "text",
           name: "Empresa",
           title: "Empresa:",
+          isRequired: true,
         },
         {
           type: "panel",
@@ -27,12 +29,12 @@ export const questionsone = {
               type: "text",
               name: "Email",
               title: "Email:",
+              isRequired: true,
             },
             {
               type: "text",
               name: "Número de Teléfono",
               title: "Número de Teléfono:",
-
             },
           ],
         },

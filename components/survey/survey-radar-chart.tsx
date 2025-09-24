@@ -76,7 +76,7 @@ export function SurveyRadarChart({
   };
 
   return (
-    <Card className="w-full border p-8 bg-white rounded-2xl">
+    <Card className="w-full border p-8 bg-white rounded-2xl dark:bg-background">
       <CardHeader className="pb-2 text-center">
         <CardTitle className="text-xl">
           {title === "Estrategia" && (
