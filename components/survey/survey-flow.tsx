@@ -73,9 +73,7 @@ export function SurveyFlow() {
     }
   };
 
-  const handleNext = async (pageAnswers: Record<string, string | number>) => {
-    updateAnswers(pageAnswers);
-
+  const handleNext = () => {
     if (currentPageIndex < currentSurvey.pages.length - 1) {
       setCurrentPageIndex((prev) => prev + 1);
     } else if (step < totalSteps) {
