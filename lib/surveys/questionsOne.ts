@@ -20,23 +20,15 @@ export const questionsone = {
           isRequired: true,
         },
         {
-          type: "panel",
-          name: "Contacts",
-          state: "collapsed",
-          title: "Contacto (opcional)",
-          elements: [
-            {
-              type: "text",
-              name: "Email",
-              title: "Email:",
-              isRequired: true,
-            },
-            {
-              type: "text",
-              name: "Número de Teléfono",
-              title: "Número de Teléfono:",
-            },
-          ],
+          type: "text",
+          name: "Email",
+          title: "Email:",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "Número de Teléfono",
+          title: "Número de Teléfono (opcional):",
         },
       ],
     },
