@@ -22,17 +22,17 @@ const stepData = [
   {
     icon: "tecnologia",
     title: "Tecnología",
-    description: "Breve descripción",
+    description: "Tecnología y Automatización",
   },
   {
     icon: "analitica",
     title: "Analítica de Datos",
-    description: "Breve descripción",
+    description: "Gestión y Analítica de Datos",
   },
   {
     icon: "gente",
     title: " Gente y Liderazgo",
-    description: "Breve descripción",
+    description: "Gente y Liderazgo para el Cambio",
   },
 ];
 

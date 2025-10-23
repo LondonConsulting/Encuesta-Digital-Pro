@@ -522,6 +522,14 @@ export function SurveyResults({
                       ))}
                     </div>
                   </div>
+                  <div className="mt-6">
+                    <h4 className="text-lg font-semibold mb-4">
+                      Análisis por Pilar
+                    </h4>
+                    <div className="grid grid-cols-1 lg:grid-cols-4">
+                      <div className="col-span-3">{/* Texto */}</div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
