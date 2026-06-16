@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
+import Anthropic from "@anthropic-ai/sdk";
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const client = new Anthropic({
+  apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
 const NIVELES_MADUREZ: Record<number, string> = {
@@ -117,17 +117,19 @@ El análisis debe ser estrictamente sobre la empresa y sus capacidades organizac
 Contáctanos en [mexico@londoncg.com](mailto:mexico@londoncg.com) o visítanos en [www.londoncg.com](https://www.londoncg.com) para descubrir cómo podemos ayudarte a alcanzar el siguiente nivel de madurez digital.
 `.trim();
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+    const response = await client.messages.create({
+      model: "claude-opus-4-8",
+      max_tokens: 8192,
+      thinking: { type: "adaptive" },
       messages: [{ role: "user", content: prompt }],
-      temperature: 0.7,
     });
 
-    if (!completion.choices?.[0]?.message?.content) {
-      throw new Error("No se recibió una respuesta válida de GPT");
+    const textBlock = response.content.find(block => block.type === "text");
+    if (!textBlock || textBlock.type !== "text") {
+      throw new Error("No se recibió una respuesta válida de Claude");
     }
 
-    const analysis = completion.choices[0].message.content;
+    const analysis = textBlock.text;
 
     return new NextResponse(
       JSON.stringify({
@@ -141,10 +143,10 @@ Contáctanos en [mexico@londoncg.com](mailto:mexico@londoncg.com) o visítanos e
       }
     );
   } catch (error) {
-    console.error("❌ Error al generar el reporte con GPT:", error);
+    console.error("❌ Error al generar el reporte con Claude:", error);
     return new NextResponse(
       JSON.stringify({
-        error: "Error al generar el reporte con GPT",
+        error: "Error al generar el reporte con Claude",
         detail: error instanceof Error ? error.message : "Unknown error",
       }),
       {
